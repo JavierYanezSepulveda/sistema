@@ -19,26 +19,31 @@
 <body>     
   <div class="container">
       <h2>Gestion de productos</h2>
-     <?php
-defined('BASEPATH') OR exit('No direct script access allowed');?>
-<?php echo validation_errors(); ?>
+      <form action="" method="post">
+          
+          <div class="row">
+              <div class="col colxs-6">
+                  <div class="input-group form-group"></div>
+                  <span class="input-group-addon">Titulo</span>
+                  <input type="text" name="nombre" class="form-control" value="" placeholder="nombre">
+              </div>
 
-<?php echo form_open(base_url().'editoriales/add'); ?>
 
-    <label for="NOMBRE">Nombre</label>
-    <input type="input" name="NOMBRE" /><br />
+              <div class="col colxs-6">
+                  <div class="input-group form-group"></div>
+                  <span class="input-group-addon">Precio</span>
+                  <input type="text" name="precio" class="form-control" value="" placeholder="Precio">
+              </div>
 
-    <label for="PRECIO">PRECIO</label>
-    <input type="input" name="PRECIO" /><br />
+          </div>
 
-    <input type="submit" name="submit" value="Añade una nueva editorial" />
 
-<?php echo form_close();?>
+           <button type="submit" class="btn btn-success">Registrar</button>
+ <a href="productos"  class="btn btn-danger">Cerrar</a>
+      </form>
 
 
   </div>
 <!-- Begin page content -->
 </body>
 </html>
-
-

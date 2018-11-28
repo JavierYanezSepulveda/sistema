@@ -1,17 +1,30 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');?>
-              
-                        <?php echo validation_errors(); ?>
-                        <?php echo form_open( (base_url()).'editoriales/edit'); ?>
+<html>
+        <head>
+                <title>CodeIgniter Tutorial</title>
+        </head>
+        <body>
+<h2><?php echo $title; ?></h2>
+ 
+<?php echo validation_errors(); ?>
 
-                        <input type="hidden" name="ID" value="<?php echo $item['ID']; ?>"/>
+<?php echo form_open ( 'productos/editar/'.$item['ID']);?> 
+    <table>
+        <tr>
+            <td><label for="NOMBRE">Titulo</label></td>
+            <td><input type="input" name="NOMBRE" size="50" value="<?php echo $item['NOMBRE'] ?>" /></td>
+        </tr>
+        <tr>
+            <td><label for="PRECIO">PRECIO</label></td>
+            <td><input type="input" name="PRECIO" value="<?php echo $item['PRECIO'] ?>"  /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" name="submit" value="Editar un productos" /></td>
+        </tr>
+    </table>
+</form>
 
-                        <label for="NOMBRE">Nombre:</label><br/>
-                        <input type="text" name="NOMBRE" value="<?php echo $item['NOMBRE']; ?>"/>
-                      
 
-                      <label for="PRECIO">precio:</label><br/>
-                        <input type="text" name="PRECIO" value="<?php echo $item['PRECIO']; ?>"/>
-
-                        <input type="submit" name="update" value="Actualizar" />
-
-                        <?php echo form_close();?>
+<p><em>Copyright © 2016</em></p>
+        </body>
+</html>

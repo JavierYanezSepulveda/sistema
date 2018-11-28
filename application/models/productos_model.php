@@ -7,6 +7,9 @@ class Productos_model extends CI_Model {
 
    }
 
+     
+
+
       public function obtener_todos(){
       $this->load->database('CSA');	
       $this->db->select('ID, NOMBRE, PRECIO');
@@ -17,15 +20,7 @@ class Productos_model extends CI_Model {
       return $consulta->result_array();
    }
 
-   
-    
-    public function delete_news($id)
-    {
-        $this->db->where('ID', $id);
-        return $this->db->delete('PRODUCTOS');
-    }
-
-     public function detalle($id)
+    public function get_news_by_id($id = 0)
     {
         if ($id === 0)
         {
@@ -36,27 +31,11 @@ class Productos_model extends CI_Model {
         $query = $this->db->get_where('PRODUCTOS', array('ID' => $id));
         return $query->row_array();
     }
-
-
-    public function add()
-    {
-    $data = array(
-        'NOMBRE'   => $this->input->post('NOMBRE'),
-        'PRECIO'   => $this->input->post('PRECIO'),
-        'ID'   => $this->input->post('ID')
-
-
-    );
-    return $this->db->insert('PRODUCTOS', $data);
-}
-
-
-    function update($id, $nombre,$precio)
+    
+    
+    public function delete_news($id)
     {
         $this->db->where('ID', $id);
-        $this->db->set('NOMBRE', $nombre);
-        $this->db->set('PRECIO', $precio);
-        return $this->db->update('PRODUCTOS');
+        return $this->db->delete('PRODUCTOS');
     }
-
 }

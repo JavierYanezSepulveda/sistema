@@ -50,10 +50,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-$route['editoriales/edit'] = 'productos_controller/edit';
-$route['productos/add'] = 'productos_controller/add';
-$route['productos/detalle/(:any)'] = 'productos_controller/detalle/$1';
-//$route['productos/editar/(:any)'] = 'productos_controller/editar/$1';
+
+
+
+$route['productos/editar/(:any)'] = 'productos_controller/editar/$1';
 $route['productos/eliminar/(:any)'] = 'productos_controller/eliminar/$1';
 $route['productos'] = 'productos_controller/moduloproducto';
 $route['agregar'] = 'productos_controller/agregarproducto';

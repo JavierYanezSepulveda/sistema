@@ -5,7 +5,7 @@ class productos_controller extends CI_Controller {
 
 	function _construct(){
 		parent::_construct();
-		$this->load->helper('url','form');
+		$this->load->helper('url');
 		$this->load->model('productos_model');
 
 
@@ -21,7 +21,10 @@ class productos_controller extends CI_Controller {
 		
 	}
 
-	
+	public function agregarproducto()
+	{
+		$this->load->view('view_productos');
+	}
 
 	public function moduloproducto()
 	{   
@@ -34,12 +37,36 @@ class productos_controller extends CI_Controller {
 
 		
 	}
-	
+	 public function editar()
+    {
+        $id = $this->uri->segment(3);
+     	$this->load->helper('url');
+   	    $this->load->model('productos_model');
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        
+        $data['title'] = 'Edita un producto';        
+        $data['item'] = $this->productos_model->get_news_by_id($id);
+        
+        $this->form_validation->set_rules('NOMBRE', 'NOMBRE', 'required');
+        $this->form_validation->set_rules('PRECIO', 'PRECIO', 'required');
+ 	
 
-       
+        if ($this->form_validation->run() === FALSE)
+        {
+    
+            $this->load->view('view_editarproducto', $data);
+         
+ 
+        }
+        else
+        {
+            $this->productos_model->obtener_todos();
+            //$this->load->view('news/success');
+            redirect( base_url() . 'index.php');
+        }
+	}
 
-
-		//funciona
 	    public function eliminar($id){
 	    	$this->load->model('productos_model');
            $id = $this->uri->segment(3);
@@ -50,76 +77,4 @@ class productos_controller extends CI_Controller {
       
 
 }
-
-public function detalle(){
-	    	$this->load->model('productos_model');
-           $id = $this->uri->segment(3);
-     	  $this->load->helper('url');
-     	  $data['item']=$this->productos_model->detalle($id);
-         $this->load->view('view_detalle', $data);
-      
-
-}
-
-public function add()
-{
-    $this->load->helper('form');
-    $this->load->library('form_validation');
-
-    $this->form_validation->set_rules('NOMBRE', 'NOMBRE', 'required');
-    $this->form_validation->set_rules('PRECIO', 'PRECIO', 'required');
-    $this->form_validation->set_rules('ID', 'ID', 'required');
-    if ($this->form_validation->run() === FALSE)
-    {
-        
-        $this->load->view('add');   
-
-    }
-    else
-    {	
-    	 $this->load->model('productos_model');
-        $this->productos_model->add();
-        $data['productos'] = $this->productos_model->obtener_todos();
-		$this->load->view('view_moduloproducto', $data);
-
-    
-    }
-}
-
-
- public function edit()
-    {
-     		
-            $this->load->helper('form');
-            $this->load->model('productos_model');
-            // Obtenemos el id de la editorial a editar
-            $id = $this->input->get('ID');
-            $data['item']  = $this->productos_model->detalle($id);
-            $nombre = $this->input->post('NOMBRE');
-            $data['NOMBRE'] = $nombre;
-
-            $precio = $this->input->post('PRECIO');
-            $data['PRECIO'] = $precio;
-     
-     			
-                $this->load->view('view_editarproducto', $data);
-         
-                $this->load->library('form_validation');
-                $this->form_validation->set_rules('NOMBRE', 'Nombre', 'required');
-                $this->form_validation->set_rules('PRECIO', 'Precio', 'required');
-                if ($this->form_validation->run() === FALSE)
-                {
-                
-                 $this->load->view('view_editarproducto');
-              
-
-                }
-                else
-                {
-                    $id = $this->input->post('ID');
-                    $this->productos_model->update($id, $nombre,$precio);
-		            $this->load->view('view_sucess');
-                }
-            }
-    
 }
