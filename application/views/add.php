@@ -19,21 +19,24 @@
 <body>     
   <div class="container">
       <h2>Gestion de productos</h2>
-     <?php
-defined('BASEPATH') OR exit('No direct script access allowed');?>
-<?php echo validation_errors(); ?>
 
-<?php echo form_open(base_url().'editoriales/add'); ?>
+      <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
+      <?php echo validation_errors(); ?>
 
-    <label for="NOMBRE">Nombre</label>
-    <input type="input" name="NOMBRE" /><br />
+      <?php echo form_open(base_url().'productos/add'); ?>
 
-    <label for="PRECIO">PRECIO</label>
-    <input type="input" name="PRECIO" /><br />
+       <label for="NOMBRE">Nombre</label>
+       <input type="input" name="NOMBRE" /><br />
 
-    <input type="submit" name="submit" value="Añade una nueva editorial" />
+       <label for="PRECIO">PRECIO</label>
+       <input type="input" name="PRECIO" /><br />
 
-<?php echo form_close();?>
+       <label for="ID">ID</label>
+       <input type="input" name="ID" /><br />
+
+        <input type="submit" name="submit" value="Añade un producto" />
+
+      <?php echo form_close();?>
 
 
   </div>

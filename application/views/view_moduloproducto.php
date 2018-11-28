@@ -17,7 +17,7 @@
     <link href="css/style.css" rel="stylesheet">
 </head> 
 <body>     
-  <a  href="agregar"  class= "btn btn-warning">Agregar Productos </a>
+  <a  href="productos/add"  class= "btn btn-warning">Agregar Productos </a>
  <table class="table table-bordered" width="100%">
   <thead>
     <tr>
@@ -38,9 +38,9 @@
       <td ><?php echo $item['NOMBRE'];?></td>
       <td ><?php echo $item['PRECIO'];?></td>
       
-     <td><a href="productos/editar/<?php echo $item['ID'];?>">Editar</a> 
-         <a href="productos/eliminar/<?php echo $item['ID'];?>">eliminar</a> 
-
+     <td><a href="<?php echo base_url();?>productos/edit?ID=<?php echo $item['ID'];?>" >Editar</a> 
+         <a href="productos/detalle/<?php echo $item['ID'];?>" class="btn btn-info">detalle</a> 
+         <a href="productos/eliminar/<?php echo $item['ID'];?>" class="btn btn-danger">eliminar</a> 
 
      </td>
    
