@@ -78,15 +78,41 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" >
+                <a class="nav-link" href="usuarios" >
                   <span data-feather="settings"></span>
-                  Configuraciones
+                  Usuarios
                 </a>
               </li>
-            </ul>
+            </ul></div>
+                      
+                        <?php if($this->session->userdata('login')){?> 
+                            <li class="nav-item">
+                                      <a class="nav-link" href="<?= base_url() ?>login/logout" >
+                                   <span data-feather="settings"></span>
+                                       Cerrar Sesion
+                                 </a>
+                                </li>
 
+                          
+                          <?php } else {?>
 
-          </div>
+                       <li >
+                      <a  href='login' style="background: none;">INICIAR SESION ... <strong class='caret'></strong></a>
+                      <div style='padding: 10px; padding-bottom: 0px; background: none; width: 400px;'>
+                        <form action="<?= base_url() ?>login" method='post' accept-charset='UTF-8' role="form">
+                          <div class='form-group'>
+                            <input class='form-control large' style='text-align: center;' type='text' name='rut' placeholder='usuario'/>
+                          </div>
+                          <div class='form-group'> 
+                            <input class='form-control large' style='text-align: center;' type='password' name='contraseña' placeholder='contraseña' />
+                          </div>
+                          <div class='form-group'>
+                            <button class='btn btn-primary' style='width: 380px;' type='submit'>INGRESAR</button>
+                          </div>
+                          </form>
+                      </div>
+                    </li> <?php } ?>
+          
         </nav>
 
         

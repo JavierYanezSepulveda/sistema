@@ -28,12 +28,35 @@
        <label for="NOMBRE">Nombre</label>
        <input type="input" name="NOMBRE" /><br />
 
-       <label for="PRECIO">PRECIO</label>
-       <input type="input" name="PRECIO" /><br />
+       <label for="PRECIO">Precio</label>
+       <input type="input" name="PRECIO_V" /><br />
 
-       <label for="ID">ID</label>
-       <input type="input" name="ID" /><br />
+       <label>Sucursal</label>
+        <select  class="form-control" style = " display:block ; " id="selectSucursal" name ="selectSucursal">
+       <?php foreach ($sucursales as $v):?>     
+        <option type ="input" name="selectSucursal" value="<?php echo $v["ID_SUCURSAL"]?> "><?php echo $v["NOMBRE_S"] ?></option> <br /> 
+        <?php endforeach ?> 
+            </select>
+       
+        
+        <p for ="selectEstado">Estado</p>
+            <select class="form-control" id="selectEstado"name="selectEstado" >
+                <option  value=" ">-- Seleccione una opcion --</option>
+                <option  type ="input"value="Activo">Activo</option>
+                <option  type ="input"value="Inactivo">Inactivo</option>
+               
+         </select><br />
+         
 
+   
+  
+
+
+       <label>Insumo</label>
+        <select  class="form-control"  id="selectInsumo" name ="selectInsumo">
+       <?php foreach ($insumos as $v):?>     
+        <option type ="input" name="selectInsumo" value="<?php echo $v["ID_INSUMO"]?> "><?php echo $v["NOMBRE_I"] ?></option>  <br />
+        <?php endforeach ?> </select>
         <input type="submit" name="submit" value="Añade un producto" />
 
       <?php echo form_close();?>

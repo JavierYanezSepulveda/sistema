@@ -13,9 +13,10 @@ class productos_controller extends CI_Controller {
 
 	public function index()
 	{   
+        //$this->session->sess_destroy();
 		$this->load->view('header');
 		$this->load->view('view_inicio');
-		$this->load->view('crear_ucc');
+		//$this->load->view('crear_ucc');
 		$this->load->view('menu_lateral');
 		$this->load->view('footer');
 		
@@ -46,7 +47,8 @@ class productos_controller extends CI_Controller {
      	  $this->load->helper('url');
           $item=$this->productos_model->delete_news($id);
           
-          return('eliminado');
+         //$data['productos'] = $this->productos_model->obtener_todos();
+         return $this->load->view('registroeliminado');
       
 
 }
@@ -55,7 +57,7 @@ public function detalle(){
 	    	$this->load->model('productos_model');
            $id = $this->uri->segment(3);
      	  $this->load->helper('url');
-     	  $data['item']=$this->productos_model->detalle($id);
+     	  $data['item']=$this->productos_model->detalles($id);
          $this->load->view('view_detalle', $data);
       
 
@@ -65,22 +67,26 @@ public function add()
 {
     $this->load->helper('form');
     $this->load->library('form_validation');
-
+    $this->load->model('productos_model');
+    $insumos = $this->productos_model->obtener_insumo();
+    $sucursales = $this->productos_model->obtener_sucursal();
+    $data  =  array( "insumos"  =>  $insumos,
+                        "sucursales"  =>  $sucursales );
     $this->form_validation->set_rules('NOMBRE', 'NOMBRE', 'required');
-    $this->form_validation->set_rules('PRECIO', 'PRECIO', 'required');
-    $this->form_validation->set_rules('ID', 'ID', 'required');
+    $this->form_validation->set_rules('PRECIO_V', 'PRECIO_V', 'required');
+   
     if ($this->form_validation->run() === FALSE)
     {
         
-        $this->load->view('add');   
+        $this->load->view('add',$data);   
 
     }
     else
     {	
     	 $this->load->model('productos_model');
         $this->productos_model->add();
-        $data['productos'] = $this->productos_model->obtener_todos();
-		$this->load->view('view_moduloproducto', $data);
+        //$data['productos'] = $this->productos_model->obtener_todos();
+		    return $this->load->view('registro');
 
     
     }
@@ -90,36 +96,40 @@ public function add()
  public function edit()
     {
      		
-            $this->load->helper('form');
+        
             $this->load->model('productos_model');
-            // Obtenemos el id de la editorial a editar
-            $id = $this->input->get('ID');
-            $data['item']  = $this->productos_model->detalle($id);
+         
+            $id = $this->input->get('ID_PRODUCTO');
+            var_dump($id);
+
+        
+            $data['item']  = $this->productos_model->detalles($id);
             $nombre = $this->input->post('NOMBRE');
             $data['NOMBRE'] = $nombre;
 
-            $precio = $this->input->post('PRECIO');
-            $data['PRECIO'] = $precio;
+            $precio = $this->input->post('PRECIO_V');
+            $data['PRECIO_V'] = $precio;
      
      			
                 $this->load->view('view_editarproducto', $data);
          
                 $this->load->library('form_validation');
-                $this->form_validation->set_rules('NOMBRE', 'Nombre', 'required');
-                $this->form_validation->set_rules('PRECIO', 'Precio', 'required');
+                $this->form_validation->set_rules('NOMBRE', 'NOMBRE', 'required');
+                $this->form_validation->set_rules('PRECIO_V', 'PRECIO_V', 'required');
                 if ($this->form_validation->run() === FALSE)
                 {
                 
-                 $this->load->view('view_editarproducto');
+                // $this->load->view('view_editarproducto');
               
 
                 }
                 else
                 {
-                    $id = $this->input->post('ID');
+                    $id = $this->input->post('ID_PRODUCTO');
                     $this->productos_model->update($id, $nombre,$precio);
-		            $this->load->view('view_sucess');
-                }
+		                return $this->load->view('view_sucess');
+                } 
+
             }
     
 }

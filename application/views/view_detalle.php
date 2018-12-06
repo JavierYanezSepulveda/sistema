@@ -13,16 +13,24 @@
   <thead>
     <tr>
       <th scope="col">Registro</th>
-      <th scope="col">Titulo</th>
-      <th scope="col">Precio</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Precio Venta</th>
+      <th scope="col">Estado</th>
+      <th scope="col">Insumo</th>
+
+
+  
     </tr>
   </thead>
   <tbody>
   
     <tr>
-      <td ><?php echo $item['ID'];?></td>
+      <td ><?php echo $item['ID_PRODUCTO'];?></td>
       <td ><?php echo $item['NOMBRE'];?></td>
-      <td ><?php echo $item['PRECIO'];?></td>
+      <td ><?php echo $item['PRECIO_V'];?></td>
+      <td ><?php echo $item['ESTADO'];?></td>
+      <td ><?php echo $item['ID_INSUMO'];?></td>
+      
     </tr>  
 
   </tbody>
